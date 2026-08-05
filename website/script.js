@@ -72,7 +72,7 @@
     var target = parseFloat(el.getAttribute('data-count'));
     var decimal = el.hasAttribute('data-decimal') ? parseInt(el.getAttribute('data-decimal'), 10) : 0;
     var suffix = el.getAttribute('data-suffix') || '';
-    var divisor = decimal ? Math.pow(10, String(decimal).length) : 1;
+    var prefix = el.getAttribute('data-prefix') || '';
     var finalValue = decimal ? parseFloat(target + '.' + decimal) : target;
     var duration = 1400;
     var start = null;
@@ -82,11 +82,11 @@
       var progressRatio = Math.min((ts - start) / duration, 1);
       var eased = 1 - Math.pow(1 - progressRatio, 3);
       var current = finalValue * eased;
-      el.textContent = (decimal ? current.toFixed(1) : Math.round(current)) + suffix;
+      el.textContent = prefix + (decimal ? current.toFixed(1) : Math.round(current)) + suffix;
       if (progressRatio < 1) requestAnimationFrame(step);
     }
     if (prefersReducedMotion) {
-      el.textContent = (decimal ? finalValue.toFixed(1) : Math.round(finalValue)) + suffix;
+      el.textContent = prefix + (decimal ? finalValue.toFixed(1) : Math.round(finalValue)) + suffix;
     } else {
       requestAnimationFrame(step);
     }
