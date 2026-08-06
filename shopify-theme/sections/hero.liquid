@@ -1,0 +1,62 @@
+{% assign vortiq_product = all_products['vortiq-pro'] %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal in">
+      <div class="eyebrow"><span class="dot"></span> {{ section.settings.eyebrow | default: 'New for 2026 — Introducing Vortiq' }}</div>
+      <h1>{{ section.settings.heading | default: 'Scrub less.<br>Shine <span class="accent">everything.</span>' }}</h1>
+      <p class="hero-sub">{{ section.settings.subheading | default: "Vortiq Pro is the cordless, long-handle electric spin scrubber that blasts through soap scum, grout grime, and kitchen grease — no bending, no scrubbing, no cords holding you back." }}</p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Get Yours{% if vortiq_product %} — {{ vortiq_product.price_min | money }}{% endif %}
+        </a>
+        <a href="#watch" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          See It In Action
+        </a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-text">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;display:inline-block;vertical-align:-4px;margin-right:6px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <strong>30-day money-back guarantee</strong> &nbsp;·&nbsp; Free UK delivery &nbsp;·&nbsp; 1-year warranty
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="badge-float badge-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        IPX7 Waterproof
+      </div>
+      <div class="badge-float badge-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        100% Cordless
+      </div>
+      <div class="badge-float badge-3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        120min Runtime
+      </div>
+      <div class="product-photo-frame" id="deviceTilt">
+        <div class="device-glow"></div>
+        {% if section.settings.hero_image %}
+          {% assign hero_height = 900 | divided_by: section.settings.hero_image.aspect_ratio %}
+          <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="Vortiq Pro cordless spin scrubber cleaning head spinning in soapy water" width="900" height="{{ hero_height }}" loading="eager">
+        {% else %}
+          <img src="{{ 'hero.jpg' | asset_url }}" alt="Vortiq Pro cordless spin scrubber cleaning head spinning in soapy water" width="648" height="1110" loading="eager">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text" },
+    { "type": "text", "id": "heading", "label": "Heading (HTML allowed)" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product photo" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+<div class="topbar">🚚 <strong>{{ section.settings.topbar_highlight | default: 'Free UK delivery' }}</strong> this week &nbsp;•&nbsp; 30-day money-back guarantee &nbsp;•&nbsp; 1-year warranty</div>
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="{{ routes.root_url }}" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#04141a" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#04141a"/></svg>
+      </span>
+      {{ section.settings.brand_name | default: 'Vortiq' }}<span style="color:var(--cyan-soft)">{{ section.settings.brand_suffix | default: 'Pro' }}</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#watch">Watch</a>
+      <a href="#attachments">Attachments</a>
+      <a href="#specs">Specs</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#pricing" class="btn btn-ghost">See Pricing</a>
+      <a href="#pricing" class="btn btn-primary">Shop Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Vortiq" },
+    { "type": "text", "id": "brand_suffix", "label": "Brand suffix", "default": "Pro" },
+    { "type": "text", "id": "topbar_highlight", "label": "Top bar highlight text", "default": "Free UK delivery" }
+  ]
+}
+{% endschema %}

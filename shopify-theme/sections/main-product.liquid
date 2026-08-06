@@ -1,0 +1,102 @@
+<section class="product-page">
+  <div class="container product-page-grid">
+    <div class="product-page-media">
+      {% if product.featured_image %}
+        {% assign featured_height = 900 | divided_by: product.featured_image.aspect_ratio %}
+        <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | default: product.title }}" class="product-page-image" width="900" height="{{ featured_height }}">
+      {% endif %}
+      {% if product.images.size > 1 %}
+        <div class="product-page-thumbs">
+          {% for image in product.images %}
+            {% assign thumb_height = 200 | divided_by: image.aspect_ratio %}
+            <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: product.title }}" class="product-page-thumb" data-full="{{ image | image_url: width: 900 }}" width="200" height="{{ thumb_height }}">
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="product-page-info">
+      <h1>{{ product.title }}</h1>
+      <div class="price-value">
+        <span class="now" id="productPrice">{{ product.selected_or_first_available_variant.price | money }}</span>
+        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+          <span class="was" id="productComparePrice">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+
+      <div class="product-page-description">{{ product.description }}</div>
+
+      {% form 'product', product, id: 'productForm' %}
+        {% if product.has_only_default_variant == false %}
+          <div class="field">
+            <label for="variantSelect">Quantity option</label>
+            <select id="variantSelect" name="id">
+              {% for variant in product.variants %}
+                <option
+                  value="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}"
+                  data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                  {% if variant.id == product.selected_or_first_available_variant.id %}selected{% endif %}
+                  {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} (Sold out){% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endif %}
+        <button type="submit" class="btn btn-primary btn-block" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}Add to Cart{% else %}Sold Out{% endif %}
+        </button>
+      {% endform %}
+
+      <a href="{{ routes.root_url }}#pricing" class="btn btn-ghost btn-block" style="margin-top:12px">Back to Vortiq Pro overview</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-page{ padding: 60px 0; }
+  .product-page-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:50px; align-items:start; }
+  @media (max-width: 900px){ .product-page-grid{ grid-template-columns: 1fr; } }
+  .product-page-image{ width:100%; border-radius: var(--radius-lg); background:#F3F7FB; padding:20px; }
+  .product-page-thumbs{ display:flex; gap:10px; margin-top:14px; }
+  .product-page-thumb{ width:64px; height:64px; object-fit:contain; background:#F3F7FB; border-radius:10px; padding:6px; cursor:pointer; border:1px solid var(--glass-border); }
+  .product-page-description{ color: var(--text-dim); margin: 20px 0; }
+</style>
+
+<script>
+  (function () {
+    var mainImg = document.querySelector('.product-page-image');
+    document.querySelectorAll('.product-page-thumb').forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        if (mainImg) mainImg.src = thumb.getAttribute('data-full');
+      });
+    });
+
+    var select = document.getElementById('variantSelect');
+    var priceEl = document.getElementById('productPrice');
+    var compareEl = document.getElementById('productComparePrice');
+    if (select) {
+      select.addEventListener('change', function () {
+        var option = select.options[select.selectedIndex];
+        if (!option || !priceEl) return;
+        priceEl.textContent = option.getAttribute('data-price');
+        if (compareEl) {
+          var compare = option.getAttribute('data-compare');
+          if (compare) {
+            compareEl.textContent = compare;
+            compareEl.style.display = '';
+          } else {
+            compareEl.style.display = 'none';
+          }
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{ "name": "Main product", "settings": [] }
+{% endschema %}

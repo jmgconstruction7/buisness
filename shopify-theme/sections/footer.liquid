@@ -1,0 +1,55 @@
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="{{ routes.root_url }}" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#04141a" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#04141a"/></svg>
+          </span>
+          Vortiq<span style="color:var(--cyan-soft)">Pro</span>
+        </a>
+        <p style="margin-top:16px;max-width:280px;font-size:14px">Cordless power scrubbing, reimagined. Less effort, more shine, every room in the house.</p>
+        <div class="socials">
+          {% if settings.social_instagram_link != blank %}<a href="{{ settings.social_instagram_link }}" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>{% endif %}
+          {% if settings.social_facebook_link != blank %}<a href="{{ settings.social_facebook_link }}" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>{% endif %}
+          {% if settings.social_tiktok_link != blank %}<a href="{{ settings.social_tiktok_link }}" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>{% endif %}
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#attachments">Attachments</a></li>
+          <li><a href="#specs">Specifications</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="{{ routes.root_url }}pages/contact">Contact Us</a></li>
+          <li><a href="{{ routes.root_url }}pages/shipping">Shipping Info</a></li>
+          <li><a href="{{ routes.root_url }}pages/warranty">Warranty</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="{{ routes.root_url }}pages/about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="{{ shop.policies.privacy_policy.url | default: routes.root_url | append: 'policies/privacy-policy' }}">Privacy Policy</a></li>
+          <li><a href="{{ shop.policies.terms_of_service.url | default: routes.root_url | append: 'policies/terms-of-service' }}">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} Vortiq. All rights reserved.</span>
+      <span>Made for people who'd rather be doing anything else but scrubbing.</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{ "name": "Footer", "settings": [] }
+{% endschema %}

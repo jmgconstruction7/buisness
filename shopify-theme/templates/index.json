@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "trust-strip": { "type": "trust-strip" },
+    "stats": { "type": "stats" },
+    "problem-solution": { "type": "problem-solution" },
+    "features": { "type": "features" },
+    "how-it-works": { "type": "how-it-works" },
+    "watch-video": { "type": "watch-video" },
+    "speed-modes": { "type": "speed-modes" },
+    "attachments": { "type": "attachments" },
+    "specs": { "type": "specs" },
+    "reviews": { "type": "reviews" },
+    "pricing": { "type": "pricing" },
+    "guarantee": { "type": "guarantee" },
+    "faq": { "type": "faq" },
+    "cta-banner": { "type": "cta-banner" }
+  },
+  "order": [
+    "hero",
+    "trust-strip",
+    "stats",
+    "problem-solution",
+    "features",
+    "how-it-works",
+    "watch-video",
+    "speed-modes",
+    "attachments",
+    "specs",
+    "reviews",
+    "pricing",
+    "guarantee",
+    "faq",
+    "cta-banner"
+  ]
+}

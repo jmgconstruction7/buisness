@@ -1,0 +1,79 @@
+{% assign vortiq_product = all_products[section.settings.product.handle] %}
+{% if vortiq_product == blank %}{% assign vortiq_product = all_products['vortiq-pro'] %}{% endif %}
+{% assign single_variant = vortiq_product.variants[0] %}
+{% assign twin_variant = vortiq_product.variants[1] %}
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow center"><span class="dot"></span> Available now</div>
+      <h2>Simple pricing</h2>
+      <p>Every order ships free and includes our 30-day money-back guarantee.</p>
+    </div>
+
+    {% if vortiq_product and single_variant %}
+    <div class="pricing-grid pricing-grid-2 reveal-stagger">
+      <div class="price-card">
+        <div class="price-name">1 Vortiq Pro</div>
+        <div class="price-value">
+          <span class="now">{{ single_variant.price | money }}</span>
+          {% if single_variant.compare_at_price > single_variant.price %}<span class="was">{{ single_variant.compare_at_price | money }}</span>{% endif %}
+        </div>
+        {% if single_variant.compare_at_price > single_variant.price %}
+          {% assign save_pct = single_variant.compare_at_price | minus: single_variant.price | times: 100 | divided_by: single_variant.compare_at_price %}
+          <div class="price-save">Save {{ save_pct }}%</div>
+        {% endif %}
+        <ul class="price-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 1× Vortiq Pro handle</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> All 8× brush heads</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Telescopic extension pole</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wall storage mount</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 1-year warranty</li>
+        </ul>
+        <button type="button" class="btn btn-ghost btn-block add-to-cart-btn" data-variant-id="{{ single_variant.id }}" {% unless single_variant.available %}disabled{% endunless %}>
+          {% if single_variant.available %}Buy 1 Now{% else %}Sold Out{% endif %}
+        </button>
+      </div>
+
+      {% if twin_variant %}
+      <div class="price-card popular">
+        <div class="price-badge">Best Value</div>
+        <div class="price-name">2 Vortiq Pro</div>
+        <div class="price-value">
+          <span class="now">{{ twin_variant.price | money }}</span>
+          {% if twin_variant.compare_at_price > twin_variant.price %}<span class="was">{{ twin_variant.compare_at_price | money }}</span>{% endif %}
+        </div>
+        {% if twin_variant.compare_at_price > twin_variant.price %}
+          {% assign save_pct2 = twin_variant.compare_at_price | minus: twin_variant.price | times: 100 | divided_by: twin_variant.compare_at_price %}
+          <div class="price-save">Save {{ save_pct2 }}%</div>
+        {% endif %}
+        <ul class="price-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2× Vortiq Pro handles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> All 16× brush heads (2 full sets)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2× telescopic extension poles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2× wall storage mounts</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2-year combined warranty</li>
+        </ul>
+        <button type="button" class="btn btn-primary btn-block add-to-cart-btn" data-variant-id="{{ twin_variant.id }}" {% unless twin_variant.available %}disabled{% endunless %}>
+          {% if twin_variant.available %}Buy 2 Now{% else %}Sold Out{% endif %}
+        </button>
+      </div>
+      {% endif %}
+    </div>
+    <p class="center" style="margin-top:20px;font-size:13px;color:var(--text-faint)">Secure checkout powered by Shopify.</p>
+    {% else %}
+      <div class="reveal" style="max-width:520px;margin:0 auto;text-align:center;padding:40px;border:1px dashed var(--glass-border);border-radius:var(--radius-md)">
+        <p style="margin:0">No product connected yet. In Shopify admin, create a product with the handle <code>vortiq-pro</code> and two variants (e.g. "1 Pack" and "2 Pack"), then assign it in this section's settings.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pricing",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Vortiq Pro product", "info": "Defaults to the product with handle 'vortiq-pro' if left blank" }
+  ]
+}
+{% endschema %}

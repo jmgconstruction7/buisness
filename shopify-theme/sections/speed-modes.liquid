@@ -1,0 +1,33 @@
+<section id="speed">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow center"><span class="dot"></span> Total control</div>
+      <h2>Three speeds. Every job covered.</h2>
+    </div>
+    <div class="speed-panel reveal">
+      <div>
+        <div class="mode-tabs" role="tablist" aria-label="Power modes">
+          <button class="mode-tab active" data-mode="eco" role="tab" aria-selected="true">Eco</button>
+          <button class="mode-tab" data-mode="standard" role="tab" aria-selected="false">Standard</button>
+          <button class="mode-tab" data-mode="turbo" role="tab" aria-selected="false">Turbo</button>
+        </div>
+        <div class="mode-detail">
+          <div class="rpm"><span id="rpmValue">150</span><span> RPM</span></div>
+          <p class="mode-desc" id="modeDesc">Gentle, controlled spin — perfect for glass, mirrors, delicate tile and everyday wipe-downs.</p>
+        </div>
+      </div>
+      <div class="gauge-wrap">
+        <div class="gauge" id="gauge" style="--pct:30">
+          <div class="gauge-head speed-eco" id="gaugeHead">
+            <div class="ring"></div>
+            <div class="core-sm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Speed modes", "settings": [] }
+{% endschema %}

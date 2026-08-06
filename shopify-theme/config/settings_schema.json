@@ -1,0 +1,18 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Vortiq",
+    "theme_version": "1.0.0",
+    "theme_author": "Vortiq",
+    "theme_documentation_url": "https://vortiq.co.uk",
+    "theme_support_email": "support@vortiq.co.uk"
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "text", "id": "social_instagram_link", "label": "Instagram URL" },
+      { "type": "text", "id": "social_facebook_link", "label": "Facebook URL" },
+      { "type": "text", "id": "social_tiktok_link", "label": "TikTok URL" }
+    ]
+  }
+]

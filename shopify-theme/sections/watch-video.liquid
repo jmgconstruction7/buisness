@@ -1,0 +1,18 @@
+<section id="watch">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow center"><span class="dot"></span> See it for yourself</div>
+      <h2>Watch it in action</h2>
+    </div>
+    <div class="video-frame reveal">
+      <video controls preload="metadata" poster="{{ 'hero.jpg' | asset_url }}" playsinline>
+        <source src="{{ 'how-it-works.mp4' | asset_url }}" type="video/mp4">
+        Your browser doesn't support embedded video. <a href="{{ 'how-it-works.mp4' | asset_url }}">Download the clip</a> instead.
+      </video>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Watch video", "settings": [] }
+{% endschema %}

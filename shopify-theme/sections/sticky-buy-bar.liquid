@@ -1,0 +1,35 @@
+{% assign vortiq_product = all_products[section.settings.product.handle] %}
+{% if vortiq_product == blank %}{% assign vortiq_product = all_products['vortiq-pro'] %}{% endif %}
+
+<div class="sticky-buy" id="stickyBuy">
+  <div class="sticky-inner">
+    <div class="sticky-info">
+      {% if vortiq_product %}
+        <img src="{{ vortiq_product.featured_image | image_url: width: 80 }}" alt="" class="mini-head" width="40" height="40">
+      {% else %}
+        <div class="mini-head"></div>
+      {% endif %}
+      <div>
+        <span class="name">{{ vortiq_product.title | default: 'Vortiq Pro' }}</span>
+        {% if vortiq_product %}
+          <div class="sticky-price">
+            {{ vortiq_product.selected_or_first_available_variant.price | money }}
+            {% if vortiq_product.selected_or_first_available_variant.compare_at_price > vortiq_product.selected_or_first_available_variant.price %}
+              <span class="was">{{ vortiq_product.selected_or_first_available_variant.compare_at_price | money }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <a href="#pricing" class="btn btn-primary">Shop Now</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sticky buy bar",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product to feature" }
+  ]
+}
+{% endschema %}
